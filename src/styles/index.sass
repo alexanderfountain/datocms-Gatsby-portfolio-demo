@@ -10,3 +10,37 @@
 @import "./blocks/social"
 @import "../../node_modules/slick-carousel/slick/slick.css"
 @import "../../node_modules/slick-carousel/slick/slick-theme.css"
+
+.slide
+ height: 500px
+ background-size: cover
+ background-repeat: no-repeat
+@media screen and (max-width: 899px)
+ .slide
+  height: 400px
+@media screen and (max-width: 500px)
+ .slide
+  height: 250px
+.home-slide
+ position: relative
+.overlay-container
+ bottom: 0px
+ z-index: 10
+ position: absolute
+@media screen and (max-width: 500px)
+ .overlay-container
+  display: none
+.overlay-top
+ background-color: rgba(0, 0, 0, 0.7)
+ color: white
+ padding: 5px 40px
+ font-weight: bold
+ font-size: 30px
+.overlay
+ background-color: rgba(0, 0, 0, 0.5)
+ color: white
+ padding: 20px 40px 10px 40px
+.venues-title
+ font-weight: bold
+ font-size: 28px
+ padding: 20px 20px 0px 20px
