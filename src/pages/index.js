@@ -3,11 +3,27 @@ import { Link, graphql } from "gatsby";
 import Masonry from "react-masonry-component";
 import Img from "gatsby-image";
 import Layout from "../components/layout";
+import { Fade } from 'react-slideshow-image';
+
+ 
+const fadeProperties = {
+  duration: 5000,
+  transitionDuration: 500,
+  infinite: false,
+  indicators: true,
+}
 
 const IndexPage = ({ data }) => (
   <Layout>
+  <Fade {...fadeProperties}>
+  {data.home.nodes[0].homeHeroSlideshow.map((slide, index) => (
+    <div>
+    <img src={slide.url} key={index} />
+    </div>
+  ))}
+  </Fade>
     <Masonry className="showcase">
-      {data.allDatoCmsVenue.edges.map(({ node: venue }) => (
+      {data.venue.edges.map(({ node: venue }) => (
         <div key={venue.id} className="showcase__item">
           <figure className="card">
             <Link to={`/venue/${venue.slug}`} className="card__image">
@@ -32,7 +48,7 @@ export default IndexPage;
 
 export const query = graphql`
   query IndexQuery {
-    allDatoCmsVenue(sort: { fields: [position], order: ASC }) {
+    venue: allDatoCmsVenue(sort: { fields: [position], order: ASC }) {
       edges {
         node {
           id
@@ -47,5 +63,12 @@ export const query = graphql`
         }
       }
     }
+    home: allDatoCmsHome {
+    nodes {
+      homeHeroSlideshow {
+        url
+      }
+    }
+  }
   }
 `;

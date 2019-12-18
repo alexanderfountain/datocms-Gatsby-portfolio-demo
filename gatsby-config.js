@@ -11,7 +11,7 @@ module.exports = {
     {
       resolve: `gatsby-source-datocms`,
       options: {
-        apiToken: "d1a486e262d911adc2c4031d15ad2d"
+        apiToken: "d1a486e262d911adc2c4031d15ad2d" //process.env.DATO_API_TOKEN
       }
     }
   ]
