@@ -27,16 +27,6 @@ const IndexPage = ({ data }) => (
           </div>
         ))}
       </Fade>
-      <div className="overlay-container">
-        <div className="overlay-top">Your next adventure awaits!</div>
-        <div className="overlay">
-          <p>
-            Elephantnose fish bluegill longfin rice eel, skipping goby king of
-            herring lefteye flounder. Glassfish, searobin ricefish deep sea
-            anglerfish Arctic char North American darter.
-          </p>
-        </div>
-      </div>
     </div>
     <Layout>
       <h2 className="venues-title">Our Venues</h2>
