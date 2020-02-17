@@ -1,31 +1,45 @@
-const path = require(`path`);
-const { createFilePath } = require(`gatsby-source-filesystem`);
+const fs = require("fs");
+const mkdirp = require("mkdirp");
+const path = require("path");
+exports.createPages = async ({ actions, graphql, reporter }, options) => {
+  // const { createPage } = actions;
 
-exports.createPages = ({ graphql, actions }) => {
-  const { createPage } = actions;
-
-  return new Promise((resolve, reject) => {
-    graphql(`
-      {
-        allDatoCmsVenue {
-          edges {
-            node {
-              slug
-            }
-          }
+  const result = await graphql(`
+    {
+      venue: allDatoCmsVenue {
+        nodes {
+          slug
         }
       }
-    `).then(result => {
-      result.data.allDatoCmsVenue.edges.map(({ node: venue }) => {
-        createPage({
-          path: `venue/${venue.slug}`,
-          component: path.resolve(`./src/templates/venue.js`),
-          context: {
-            slug: venue.slug
-          }
-        });
-      });
-      resolve();
+      blog: allDatoCmsBlog {
+        nodes {
+          slug
+        }
+      }
+    }
+  `);
+
+  console.log(result.data.venues);
+
+  result.data.venue.nodes.forEach(node => {
+    const id = node.id;
+    actions.createPage({
+      path: `venue/${node.slug}`,
+      component: path.resolve(`./src/templates/venue.js`),
+      context: {
+        slug: node.slug
+      }
+    });
+  });
+
+  result.data.blog.nodes.forEach(node => {
+    const id = node.id;
+    actions.createPage({
+      path: `blog/${node.slug}`,
+      component: path.resolve(`./src/templates/blog.js`),
+      context: {
+        slug: node.slug
+      }
     });
   });
 };

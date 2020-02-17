@@ -9,13 +9,13 @@ export default ({ data }) => (
   <Layout>
     <article className="sheet">
       <div className="sheet__inner">
-        <h1 className="sheet__title">{data.datoCmsVenue.title}</h1>
-        <p className="sheet__lead">{data.datoCmsVenue.excerpt}</p>
+        <h1 className="sheet__title">{data.datoCmsBlog.title}</h1>
+        <p className="sheet__lead">{data.datoCmsBlog.excerpt}</p>
         <div className="sheet__slider">
           <Slider infinite={true} slidesToShow={2} arrows>
-            {data.datoCmsVenue.gallery.map(({ fluid }) => (
+            {data.datoCmsBlog.gallery.map(({ fluid }) => (
               <img
-                alt={data.datoCmsVenue.title}
+                alt={data.datoCmsBlog.title}
                 key={fluid.src}
                 src={fluid.src}
               />
@@ -25,11 +25,11 @@ export default ({ data }) => (
         <div
           className="sheet__body"
           dangerouslySetInnerHTML={{
-            __html: data.datoCmsVenue.descriptionNode.childMarkdownRemark.html
+            __html: data.datoCmsBlog.descriptionNode.childMarkdownRemark.html
           }}
         />
         <div className="sheet__gallery">
-          <Img fluid={data.datoCmsVenue.coverImage.fluid} />
+          <Img fluid={data.datoCmsBlog.coverImage.fluid} />
         </div>
       </div>
     </article>
@@ -37,8 +37,8 @@ export default ({ data }) => (
 );
 
 export const query = graphql`
-  query VenueQuery($slug: String!) {
-    datoCmsVenue(slug: { eq: $slug }) {
+  query BlogQuery($slug: String!) {
+    datoCmsBlog(slug: { eq: $slug }) {
       title
       excerpt
       gallery {
